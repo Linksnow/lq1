@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}my information{% endblock %}
+{% block content %}
+<div class="row text-center vertical-middle-sm">
+    <h1>My Information</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4 text-right"><span>用户名：</span></div>
+                <div class="col-md-8 text-left"><span>{{user.username}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>邮箱：</span></div>
+                <div class="col-md-8 text-left"><span>{{user.email}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>生日：</span></div>
+                <div class="col-md-8 text-left"><span>{{userprofile.birth}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>电话：</span></div>
+                <div class="col-md-8 text-left"><span>{{userprofile.phone}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>学校：</span></div>
+                <div class="col-md-8 text-left"><span>{{userinfo.school}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>公司：</span></div>
+                <div class="col-md-8 text-left"><span>{{userinfo.company}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>职业：</span></div>
+                <div class="col-md-8 text-left"><span>{{userinfo.professions}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>地址：</span></div>
+                <div class="col-md-8 text-left"><span>{{userinfo.address}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>个性签名：</span></div>
+                <div class="col-md-8 text-left"><span>{{userinfo.aboutme}}</span></div>
+            </div><br><br>
+            <div class="row" style="margin-left:-200px">
+            <a href="{% url 'account:myself_edit' %}"><input type="button" class="btn btn-primary btn-lg" value="edit"></a>
+            </div>
+        </div>
+        <div class="col-md-6">
+                {% load staticfiles %}
+            <div style="margin-right:100px">
+                {% if userinfo.photo %}
+                <img src="{{ userinfo.photo | striptags }}" alt="" class="img-circle" id="my_photo" name="user_face">
+                {% else %}
+                <img src="{% static 'images/home.jpg' %}" alt="" class="img-circle" id="my_photo">
+                {% endif %}
+            </div>
+            <div style="margin:100px"><button class="btn btn-primary btn-lg" id="upload_image" onclick="upload_image_layer()">上传照片</button></div>
+        </div>
+        
+        
+    </div>
+</div>
+<script type="text/javascript" src='{% static "js/jquery.js" %}'></script>
+<script type="text/javascript" src="{% static 'js/layer.js'%}"></script>
+<script>
+function upload_image_layer(){
+    layer.open({
+
+        title:"上传头像",
+        area: ['650px', '600px'],
+        type:2,
+        content:"{% url 'account:my_image' %}",
+    });
+}
+</script>
+{% endblock %}

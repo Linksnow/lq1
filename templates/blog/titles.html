@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}blog titles{% endblock %}
+{%block content %}
+<div class="row text-center vertical-middle-sm">
+    <h1></h1>
+</div>
+<div class="container">
+    {% for blog in blogs %}
+    <div class="list-group">
+        <a href="{{blog.id}}" class="list-group-item" active>
+            <h4 class="list-group-item-heading">{{blog.title}}</h4>
+            <p class="list-group-item-text">author:{{blog.author.username}}</p>
+            <p class="list-group-item-text">summary:{{blog.body|slice:'78'|linebreaks}}</p>
+
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock%}

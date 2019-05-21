@@ -1,0 +1,20 @@
+{% extends 'article/base.html' %}
+{% load staticfiles %}
+{% block title %}article titles{% endblock %}
+{%block content %}
+<div class="row text-center vertical-middle-sm">
+    <h1>reading,writing, and for yourself</h1>
+</div>
+<div class="container">
+    {% for article in articles %}
+    <div class="list-group">
+        <a href="{% url 'article:article_detail' article.id article.slug %}" class="list-group-item" active>
+            <h4 class="list-group-item-heading">{{article.title}}</h4>
+            <p class="list-group-item-text">author:{{article.author.username}}</p>
+            <p class="list-group-item-text">summary:{{article.body|slice:'78'|linebreaks}}</p>
+
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock%}
