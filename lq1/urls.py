@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.views import static ##新增
+from django.conf import settings ##新增
+from django.conf.urls import url ##新增
 
 
 urlpatterns = [
@@ -25,4 +28,5 @@ urlpatterns = [
     path('article/',include('article.urls',namespace='article')),
     path('home/',TemplateView.as_view(template_name='home.html')),
     path('',TemplateView.as_view(template_name='home.html')),
+    url(r'^static/(?P<path>.*)$', static.serve,{'document_root': settings.STATIC_ROOT}, name='static'),
 ]

@@ -45,7 +45,7 @@ def rename_article_column(request):
         return HttpResponse("0")
 
 
-@login_required(login_url='/account/login')
+@login_required(login_url='/account/login/')
 @require_POST
 @csrf_exempt
 def del_article_column(request):
@@ -83,7 +83,7 @@ def article_post(request):
         article_columns=request.user.article_column.all()
         return render(request,'article/column/article_post.html',{'article_post_form':article_post_form,'article_columns':article_columns})
 
-@login_required(login_url='/account/login')
+@login_required(login_url='/account/login/')
 def article_list(request):
     if request.method=='GET':
         articles = ArticlePost.objects.filter(author=request.user)
@@ -91,12 +91,12 @@ def article_list(request):
     else:
         return HttpResponse('error')
 
-@login_required(login_url='/account/login')
+@login_required(login_url='/account/login/')
 def article_detail(request,id,slug):
     article=get_object_or_404(ArticlePost,id=id,slug=slug)
     return render(request,'article/column/article_detail.html',{'article':article})
 
-@login_required(login_url='/account/login')
+@login_required(login_url='/account/login/')
 @require_POST
 @csrf_exempt
 def del_article(request):
@@ -108,7 +108,7 @@ def del_article(request):
     except:
         return HttpResponse('2')
 
-@login_required(login_url='/account/login')
+@login_required(login_url='/account/login/')
 @csrf_exempt
 def redit_article(request, article_id):
     if request.method == "GET":
